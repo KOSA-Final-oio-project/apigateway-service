@@ -1,26 +1,65 @@
-server:
-  port: 9797
-
-#eureka ??
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-#??? ?? ??
-spring:
-  application:
-    name: apigateway-service
-  cloud:
-    gateway:
-      routes:
-        - id: member-service
-          uri: lb://MEMBER-SERVICE
-          predicates:
-            - Path=/member-service/**
-            - Method=GET
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+#server:
+#  port: 9797
+#
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#
+#spring:
+#  application:
+#    name: apigateway-service
+#  cloud:
+#    gateway:
+#      routes:
+#          # COMPOSITION SERVICE #
+#        - id: composition-service
+#          uri: lb://COMPOSITION-SERVICE
+#          predicates:
+#            - Path=/composition-service/**
+#            - Method=GET
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/composition-service/(?<segment>.*), /$\{segment}
+#
+#          # CONTENT SERVICE #
+#        - id: content-service
+#          uri: lb://CONTENT-SERVICE
+#          predicates:
+#            - Path=/content-service/**
+#            - Method=GET
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/content-service/(?<segment>.*), /$\{segment}
+#
+#          # MEMBER SERVICE #
+#        - id: member-service
+#          uri: lb://MEMBER-SERVICE
+#          predicates:
+#            - Path=/member-service/**
+#            - Method=GET
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+#
+#          # PRODUCT SERVICE #
+#        - id: product-service
+#          uri: lb://PRODUCT-SERVICE
+#          predicates:
+#            - Path=/product-service/**
+#            - Method=GET
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/product-service/(?<segment>.*), /$\{segment}
+#
+#          # TRANSACTION SERVICE #
+#        - id: transaction-service
+#          uri: lb://TRANSACTION-SERVICE
+#          predicates:
+#            - Path=/transaction-service/**
+#            - Method=GET
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/transaction-service/(?<segment>.*), /$\{segment}
